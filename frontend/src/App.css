@@ -1,0 +1,58 @@
+.shipment-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  background-color: white;
+  box-shadow: 2px 2px 5px gray;
+  border-radius: 5px;
+  margin-bottom: 5px ;
+  padding: 1em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.input-container{
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.form-fields{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 2px;
+}
+
+.btn{
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  color:white;
+  background-color: rgb(5 163 45);
+  border-radius: 10px;
+  margin: 10px ;
+  padding: 10px 1.5em;
+}
+
+.label{
+  margin: 2px 0;
+}
+
+.field{
+  outline: none;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid black;
+  margin: 2px 0;
+}
+
+.error{
+  color: red;
+}

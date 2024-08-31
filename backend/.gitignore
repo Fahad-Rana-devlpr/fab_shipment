@@ -1,0 +1,11 @@
+# ignore node_modules directory
+node_modules/
+
+# ignore log files
+*.log
+
+# ignore evnviorment files
+.env
+
+# ignore lock.json file
+package-lock.json
