@@ -48,7 +48,7 @@ const create_shipment = async (req, res) => {
             return res.json({message:'There is some error while creating label for these addresses.', status:false})
         }
         const data = await Shipment.create({...req.body, labelUrl: transaction.labelUrl})
-        return res.json({ message: "label created successfully." , status: false, data: data._id })
+        return res.json({ message: "label created successfully." , status: true, data: data._id })
     } catch (error) {
         console.log(error)
         return res.json({ message: error.message, status: false })
