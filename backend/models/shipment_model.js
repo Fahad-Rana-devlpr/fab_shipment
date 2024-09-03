@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 
 const shipmentSchema = new mongoose.Schema({
+  senderName: {
+    type: String,
+    required: true
+  },
+  senderAddress: {
+    type: String,
+    required: true
+  },
   recipientName: {
     type: String,
     required: true

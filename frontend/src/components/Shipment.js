@@ -3,9 +3,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import {toast} from 'react-toastify'
+import {useNavigate} from 'react-router-dom'
 
 const Shipment = () => {
+  const navigate = useNavigate();
   const shipmentSchema = Yup.object().shape({
+    senderName: Yup.string().required('Sender Name is required'),
+    senderAddress: Yup.string().required('Sender Address is required'),
     recipientName: Yup.string().required('Recipient Name is required'),
     address: Yup.string().required('Address is required'),
     city: Yup.string().required('City is required'),
@@ -19,18 +23,18 @@ const Shipment = () => {
     setSubmitting(true);
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/shipment`, values);
-      if (response.status) {
-        console.log('hyeeeeeeeeeeeeee')
+      if (response.data.status) {
         resetForm();
         setSubmitting(false);
-        toast.success('Shipment created successfully!', {
+        toast.success( response.data.message, {
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
         });
+        navigate(`/label/${response.data.data._id}`)
       } else {
-        toast.error('Shipment not created!')
+        toast.error(response.data.message)
         setSubmitting(false)
       }
     } catch (error) {
@@ -42,6 +46,8 @@ const Shipment = () => {
     <div className='shipment-div'>
       <Formik
         initialValues={{
+          senderName:'',
+          senderAddress:'',
           recipientName: '',
           address: '',
           city: '',
@@ -58,6 +64,16 @@ const Shipment = () => {
           <Form className='shipment-container'>
             <h1>Shipment Form</h1>
             <div className='input-container'>
+              <div className='form-fields'>
+                <label htmlFor="senderName" className='label'>Sender Name</label>
+                <Field type="text" name="senderName" className='field'/>
+                <ErrorMessage name="senderName" component="small" className='error' />
+              </div>
+              <div className='form-fields'>
+                <label htmlFor="senderAddress" className='label'>Sender Address</label>
+                <Field type="text" name="senderAddress" className='field'/>
+                <ErrorMessage name="senderAddress" component="small" className='error' />
+              </div>
               <div className='form-fields'>
                 <label htmlFor="recipientName" className='label'>Recipient Name</label>
                 <Field type="text" name="recipientName" className='field'/>
