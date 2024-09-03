@@ -5,39 +5,75 @@ const shipmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  senderAddress: {
+  senderStreet: {
     type: String,
     required: true
   },
-  recipientName: {
+  senderCity: {
     type: String,
     required: true
   },
-  address: {
+  senderState: {
     type: String,
     required: true
   },
-  city: {
+  senderZip: {
     type: String,
     required: true
   },
-  state: {
+  senderCountry: {
     type: String,
     required: true
   },
-  postalCode: {
+  senderEmail: {
     type: String,
     required: true
   },
-  country: {
+  senderPhone: {
     type: String,
     required: true
   },
-  weight: {
+  reciverName: {
     type: String,
     required: true
   },
-  trackingNumber: {
+  reciverStreet: {
+    type: String,
+    required: true
+  },
+  reciverCity: {
+    type: String,
+    required: true
+  },
+  reciverState: {
+    type: String,
+    required: true
+  },
+  reciverZip: {
+    type: String,
+    required: true
+  },
+  reciverCountry: {
+    type: String,
+    required: true
+  },
+  parcelLength: {
+    type: String,
+    required: true
+  },
+  parcelWidth: {
+    type: String,
+    required: true
+  },
+  parcelHeight: {
+    type: String,
+    required: true
+  },
+  parcelWeight: {
+    type: String,
+    required: true
+  },
+  labelUrl: {
     type: String,
     required: true
   },

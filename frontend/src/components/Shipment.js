@@ -9,15 +9,23 @@ const Shipment = () => {
   const navigate = useNavigate();
   const shipmentSchema = Yup.object().shape({
     senderName: Yup.string().required('Sender Name is required'),
-    senderAddress: Yup.string().required('Sender Address is required'),
-    recipientName: Yup.string().required('Recipient Name is required'),
-    address: Yup.string().required('Address is required'),
-    city: Yup.string().required('City is required'),
-    state: Yup.string().required('State is required'),
-    postalCode: Yup.string().required('Postal Code is required').matches(/^[0-9]{5}$/, 'Postal Code must be 5 digits'),
-    country: Yup.string().required('Country is required'),
-    weight: Yup.number().required('Weight is required').positive('Weight must be positive'),
-    trackingNumber: Yup.string().required('Tracking Number is required')
+    senderStreet: Yup.string().required('Sender street Address is required'),
+    senderCity: Yup.string().required('Sender cith is required'),
+    senderState: Yup.string().required('Sender state is required'),
+    senderZip: Yup.string().required('Sender zip code is required'),
+    senderCountry: Yup.string().required('Sender country is required'),
+    senderEmail: Yup.string().required('Sender email is required'),
+    senderPhone: Yup.string().required('Sender Phone number is required'),
+    reciverName: Yup.string().required('Reciver Name is required'),
+    reciverStreet: Yup.string().required('Reciver Street Address is required'),
+    reciverCity: Yup.string().required('Reciver City is required'),
+    reciverState: Yup.string().required('Reciver State is required'),
+    reciverZip: Yup.string().required('Reciver Zip Code is required').matches(/^[0-9]{5}$/, 'Postal Code must be 5 digits'),
+    reciverCountry: Yup.string().required('Reciver Country is required'),
+    parcelLength: Yup.number().required('Length is required').positive('Length must be positive'),
+    parcelWidth: Yup.number().required('Width is required').positive('Width must be positive'),
+    parcelHeight: Yup.number().required('Height is required').positive('Height must be positive'),
+    parcelWeight: Yup.number().required('Weight is required').positive('Weight must be positive'),
   });
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     setSubmitting(true);
@@ -32,7 +40,7 @@ const Shipment = () => {
           closeOnClick: true,
           pauseOnHover: true,
         });
-        navigate(`/label/${response.data.data._id}`)
+        navigate(`/label/${response.data.data}`)
       } else {
         toast.error(response.data.message)
         setSubmitting(false)
@@ -47,15 +55,23 @@ const Shipment = () => {
       <Formik
         initialValues={{
           senderName:'',
-          senderAddress:'',
-          recipientName: '',
-          address: '',
-          city: '',
-          state: '',
-          postalCode: '',
-          country: '',
-          weight: '',
-          trackingNumber: '',
+          senderStreet:'',
+          senderCity:'',
+          senderState:'',
+          senderZip:'',
+          senderCountry:'',
+          senderEmail:'',
+          senderPhone:'',
+          reciverName:'',
+          reciverStreet: '',
+          reciverCity: '',
+          reciverState: '',
+          reciverZip: '',
+          reciverCountry: '',
+          parcelLength: '',
+          parcelWidth: '',
+          parcelHeight: '',
+          parcelWeight:''
         }}
         validationSchema={shipmentSchema}
         onSubmit={handleSubmit}
@@ -70,57 +86,100 @@ const Shipment = () => {
                 <ErrorMessage name="senderName" component="small" className='error' />
               </div>
               <div className='form-fields'>
-                <label htmlFor="senderAddress" className='label'>Sender Address</label>
-                <Field type="text" name="senderAddress" className='field'/>
-                <ErrorMessage name="senderAddress" component="small" className='error' />
+                <label htmlFor="senderStreet" className='label'>Sender Street Address</label>
+                <Field type="text" name="senderStreet" className='field'/>
+                <ErrorMessage name="senderStreet" component="small" className='error' />
               </div>
               <div className='form-fields'>
-                <label htmlFor="recipientName" className='label'>Recipient Name</label>
-                <Field type="text" name="recipientName" className='field'/>
-                <ErrorMessage name="recipientName" component="small" className='error' />
+                <label htmlFor="senderCity" className='label'>Sender City</label>
+                <Field type="text" name="senderCity" className='field'/>
+                <ErrorMessage name="senderCity" component="small" className='error' />
+              </div>
+              <div className='form-fields'>
+                <label htmlFor="senderState" className='label'>Sender State</label>
+                <Field type="text" name="senderState" className='field'/>
+                <ErrorMessage name="senderState" component="small" className='error' />
+              </div>
+              <div className='form-fields'>
+                <label htmlFor="senderZip" className='label'>Sender Zip Code</label>
+                <Field type="text" name="senderZip" className='field'/>
+                <ErrorMessage name="senderZip" component="small" className='error' />
+              </div>
+              <div className='form-fields'>
+                <label htmlFor="senderCountry" className='label'>Sender Country</label>
+                <Field type="text" name="senderCountry" className='field'/>
+                <ErrorMessage name="senderCountry" component="small" className='error' />
+              </div>
+              <div className='form-fields'>
+                <label htmlFor="senderEmail" className='label'>Sender Email</label>
+                <Field type="text" name="senderEmail" className='field'/>
+                <ErrorMessage name="senderEmail" component="small" className='error' />
+              </div>
+              <div className='form-fields'>
+                <label htmlFor="senderPhone" className='label'>Sender Phone</label>
+                <Field type="text" name="senderPhone" className='field'/>
+                <ErrorMessage name="senderPhone" component="small" className='error' />
+              </div>
+              <div className='form-fields'>
+                <label htmlFor="reciverName" className='label'>Reciver Name</label>
+                <Field type="text" name="reciverName" className='field'/>
+                <ErrorMessage name="reciverName" component="small" className='error' />
               </div>
 
               <div className='form-fields'>
-                <label htmlFor="address" className='label'>Address</label>
-                <Field type="text" name="address" className='field'/>
-                <ErrorMessage name="address" component="small" className='error' />
+                <label htmlFor="reciverStreet" className='label'>Reciver Street Address</label>
+                <Field type="text" name="reciverStreet" className='field'/>
+                <ErrorMessage name="reciverStreet" component="small" className='error' />
               </div>
 
               <div className='form-fields'>
-                <label htmlFor="city" className='label'>City</label>
-                <Field type="text" name="city" className='field'/>
-                <ErrorMessage name="city" component="small" className='error' />
+                <label htmlFor="reciverCity" className='label'>Reciver City</label>
+                <Field type="text" name="reciverCity" className='field'/>
+                <ErrorMessage name="reciverCity" component="small" className='error' />
               </div>
 
               <div className='form-fields'>
-                <label htmlFor="state" className='label'>State</label>
-                <Field type="text" name="state" className='field'/>
-                <ErrorMessage name="state" component="small" className='error' />
+                <label htmlFor="reciverState" className='label'>Reciver State</label>
+                <Field type="text" name="reciverState" className='field'/>
+                <ErrorMessage name="reciverState" component="small" className='error' />
               </div>
 
               <div className='form-fields'>
-                <label htmlFor="postalCode" className='label'>Postal Code</label>
-                <Field type="text" name="postalCode" className='field'/>
-                <ErrorMessage name="postalCode" component="small" className='error' />
+                <label htmlFor="reciverZip" className='label'>Reciver Zip Code</label>
+                <Field type="text" name="reciverZip" className='field'/>
+                <ErrorMessage name="reciverZip" component="small" className='error' />
               </div>
 
               <div className='form-fields'>
-                <label htmlFor="country" className='label'>Country</label>
-                <Field type="text" name="country" className='field'/>
-                <ErrorMessage name="country" component="small" className='error' />
+                <label htmlFor="reciverCountry" className='label'>Reciver Country</label>
+                <Field type="text" name="reciverCountry" className='field'/>
+                <ErrorMessage name="reciverCountry" component="small" className='error' />
               </div>
 
               <div className='form-fields'>
-                <label htmlFor="weight" className='label'>Weight (kg)</label>
-                <Field type="number" name="weight" className='field'/>
-                <ErrorMessage name="weight" component="small" className='error' />
+                <label htmlFor="parcelLength" className='label'>Parcel Length (IN)</label>
+                <Field type="number" name="parcelLength" className='field'/>
+                <ErrorMessage name="parcelLength" component="small" className='error' />
               </div>
 
               <div className='form-fields'>
-                <label htmlFor="trackingNumber" className='label'>Tracking Number</label>
-                <Field type="text" name="trackingNumber" className='field'/>
-                <ErrorMessage name="trackingNumber" component="small" className='error' />
+                <label htmlFor="parcelWidth" className='label'>Parcel Width (IN)</label>
+                <Field type="number" name="parcelWidth" className='field'/>
+                <ErrorMessage name="parcelWidth" component="small" className='error' />
               </div>
+
+              <div className='form-fields'>
+                <label htmlFor="parcelHeight" className='label'>Parcel Height (IN)</label>
+                <Field type="number" name="parcelHeight" className='field'/>
+                <ErrorMessage name="parcelHeight" component="small" className='error' />
+              </div>
+
+              <div className='form-fields'>
+                <label htmlFor="parcelWeight" className='label'>Parcel Weight (kg)</label>
+                <Field type="number" name="parcelWeight" className='field'/>
+                <ErrorMessage name="parcelWeight" component="small" className='error' />
+              </div>
+
             </div>
 
             <button type="submit" disabled={isSubmitting} className='btn'>
